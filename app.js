@@ -14,6 +14,10 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+
+const workers = [];
+const workerIdArray = [];
+
 console.log("Please assign a Manager");
 inquirer.prompt([
     {
@@ -37,34 +41,100 @@ inquirer.prompt([
         message: "What is the Manager's office number? "
     }
 ])
-.then(answers => {
-    const manager = new Manager({...answers});
-    newWorker();
-})
+    .then(answers => {
+        const manager = new Manager(answers.manager, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+        workers.push(manager);
+        workerIdArray.push(answers.managerId);
+        newWorker();
+    })
 
-function newWorker(){
+function newWorker() {
     inquirer.prompt([
         {
-            type: "input",
+            type: "list",
             name: "workerType",
             message: "What type of worker are you employing? ",
             choices: ["Engineer", "Intern", "Finished hiring!"]
         }
     ])
-    .then(answer =>{
-        switch(answer.workerType){
-            case "Engineer":
-                hireEngineer();
-                break;
-            case "Intern":
-                hireIntern();
-                break;
-            default:
-                //make Team
-        }
-    })
+        .then(answer => {
+            switch (answer.workerType) {
+                case "Engineer":
+                    hireEngineer();
+                    break;
+                case "Intern":
+                    hireIntern();
+                    break;
+                default:
+                    sendWorkers();
+            }
+        })
 }
 
+function hireEngineer() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "engineerName",
+            message: "What is the Engineer's name? "
+        },
+        {
+            type: "input",
+            name: "engineerId",
+            message: "What is the Engineer's ID? "
+        },
+        {
+            type: "input",
+            name: "engineerEmail",
+            message: "What is the Engineer's email? "
+        },
+        {
+            type: "input",
+            name: "engineerGithub",
+            message: "What is the Engineer's GitHub username? "
+        }
+    ])
+        .then(answers => {
+            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+            workers.push(engineer);
+            workerIdArray.push(answers.engineerId);
+            newWorker();
+        })
+}
+
+function hireIntern() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "internName",
+            message: "What is the Intern's name? "
+        },
+        {
+            type: "input",
+            name: "internId",
+            message: "What is the Intern's ID? "
+        },
+        {
+            type: "input",
+            name: "internEmail",
+            message: "What is the Intern's email? "
+        },
+        {
+            type: "input",
+            name: "internSchool",
+            message: "What is the Intern's school? "
+        }
+    ])
+        .then(answers => {
+            const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+            workers.push(intern);
+            workerIdArray.push(answers.internId);
+            newWorker();
+        })
+}
+function sendWorkers() {
+    
+}
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
