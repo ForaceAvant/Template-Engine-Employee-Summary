@@ -39,7 +39,31 @@ inquirer.prompt([
 ])
 .then(answers => {
     const manager = new Manager({...answers});
+    newWorker();
 })
+
+function newWorker(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "workerType",
+            message: "What type of worker are you employing? ",
+            choices: ["Engineer", "Intern", "Finished hiring!"]
+        }
+    ])
+    .then(answer =>{
+        switch(answer.workerType){
+            case "Engineer":
+                hireEngineer();
+                break;
+            case "Intern":
+                hireIntern();
+                break;
+            default:
+                //make Team
+        }
+    })
+}
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
