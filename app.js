@@ -43,7 +43,16 @@ inquirer.prompt([
     {
         type: "input",
         name: "managerEmail",
-        message: "What is the Manager's email? "
+        message: "What is the Manager's email? ",
+        validate: answer => {
+            const isEmail = answer.match(
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+            if(isEmail){
+                return true;
+            }
+            return "Please enter a valid email."
+        }
     },
     {
         type: "input",
@@ -97,7 +106,16 @@ function hireEngineer() {
         {
             type: "input",
             name: "engineerEmail",
-            message: "What is the Engineer's email? "
+            message: "What is the Engineer's email? ",
+            validate: answer => {
+                const isEmail = answer.match(
+                    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                );
+                if(isEmail){
+                    return true;
+                }
+                return "Please enter a valid email."
+            }
         },
         {
             type: "input",
@@ -130,7 +148,16 @@ function hireIntern() {
         {
             type: "input",
             name: "internEmail",
-            message: "What is the Intern's email? "
+            message: "What is the Intern's email? ",
+            validate: answer => {
+                const isEmail = answer.match(
+                    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                );
+                if(isEmail){
+                    return true;
+                }
+                return "Please enter a valid email."
+            }
         },
         {
             type: "input",
