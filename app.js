@@ -123,16 +123,20 @@ function hireEngineer() {
         {
             type: "input",
             name: "engineerId",
-            message: "What is the Engineer's ID? ",
+            message: "What is the Engineer's ID number? ",
             validate: answer => {
                 const isNum = answer.match(
                     /^[1-9]\d*$/
                 );
-                if(isNum){
+                const idTaken = workerIdArray.includes(answer);
+                if(isNum && !idTaken){
                     return true
                 }
                 else if(!isNum){
                     return "Please enter a positive number greater than zero."
+                }
+                else{
+                    return "ID is taken, please select another";
                 }
             }
         },
@@ -181,11 +185,15 @@ function hireIntern() {
                 const isNum = answer.match(
                     /^[1-9]\d*$/
                 );
-                if(isNum){
+                const idTaken = workerIdArray.includes(answer);
+                if(isNum && !idTaken){
                     return true
                 }
                 else if(!isNum){
                     return "Please enter a positive number greater than zero."
+                }
+                else{
+                    return "ID is taken, please select another";
                 }
             }
         },
