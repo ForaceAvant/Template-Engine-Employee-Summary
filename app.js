@@ -18,12 +18,22 @@ const render = require("./lib/htmlRenderer");
 const workers = [];
 const workerIdArray = [];
 
+function nameValidation(name){
+    if(name === ""){
+        return "Answer must contain atleast one character!"
+    }
+    else{
+        return true;
+    }
+}
+
 console.log("Please assign a Manager");
 inquirer.prompt([
     {
         type: "input",
         name: "manager",
-        message: "What is the Manager's name? "
+        message: "What is the Manager's name? ",
+        validate: nameValidation
     },
     {
         type: "input",
@@ -76,7 +86,8 @@ function hireEngineer() {
         {
             type: "input",
             name: "engineerName",
-            message: "What is the Engineer's name? "
+            message: "What is the Engineer's name? ",
+            validate: nameValidation
         },
         {
             type: "input",
@@ -91,7 +102,8 @@ function hireEngineer() {
         {
             type: "input",
             name: "engineerGithub",
-            message: "What is the Engineer's GitHub username? "
+            message: "What is the Engineer's GitHub username? ",
+            validate: nameValidation
         }
     ])
         .then(answers => {
@@ -107,7 +119,8 @@ function hireIntern() {
         {
             type: "input",
             name: "internName",
-            message: "What is the Intern's name? "
+            message: "What is the Intern's name? ",
+            validate: nameValidation
         },
         {
             type: "input",
@@ -122,7 +135,8 @@ function hireIntern() {
         {
             type: "input",
             name: "internSchool",
-            message: "What is the Intern's school? "
+            message: "What is the Intern's school? ",
+            validate: nameValidation
         }
     ])
         .then(answers => {
