@@ -38,7 +38,18 @@ inquirer.prompt([
     {
         type: "input",
         name: "managerId",
-        message: "What is the Manager's ID? "
+        message: "What is the Manager's ID? ",
+        validate: answer => {
+            const isNum = answer.match(
+                /^[1-9]\d*$/
+            );
+            if(isNum){
+                return true
+            }
+            else if(!isNum){
+                return "Please enter a positive number greater than zero."
+            }
+        }
     },
     {
         type: "input",
@@ -57,7 +68,18 @@ inquirer.prompt([
     {
         type: "input",
         name: "managerOfficeNumber",
-        message: "What is the Manager's office number? "
+        message: "What is the Manager's office number? ",
+        validate: answer => {
+            const isNum = answer.match(
+                /^[1-9]\d*$/
+            );
+            if(isNum){
+                return true
+            }
+            else{
+                return "Please enter a positive number greater than zero."
+            }
+        }
     }
 ])
     .then(answers => {
@@ -101,7 +123,18 @@ function hireEngineer() {
         {
             type: "input",
             name: "engineerId",
-            message: "What is the Engineer's ID? "
+            message: "What is the Engineer's ID? ",
+            validate: answer => {
+                const isNum = answer.match(
+                    /^[1-9]\d*$/
+                );
+                if(isNum){
+                    return true
+                }
+                else if(!isNum){
+                    return "Please enter a positive number greater than zero."
+                }
+            }
         },
         {
             type: "input",
@@ -143,7 +176,18 @@ function hireIntern() {
         {
             type: "input",
             name: "internId",
-            message: "What is the Intern's ID? "
+            message: "What is the Intern's ID? ",
+            validate: answer => {
+                const isNum = answer.match(
+                    /^[1-9]\d*$/
+                );
+                if(isNum){
+                    return true
+                }
+                else if(!isNum){
+                    return "Please enter a positive number greater than zero."
+                }
+            }
         },
         {
             type: "input",
